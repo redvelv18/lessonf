@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+
+<body>
+  <input type="text" id="num1" />
+  <input type="text" id="operator" />
+  <input type="text" id="num2" />
+  <button id="btn">Rēķināt</button>
+  <p id="output"></p>
+
+
+  <script>
+    let num1In = document.getElementById("num1");
+    let operatorIn = document.getElementById("operator");
+    let num2In = document.getElementById("num2");
+    let btn = document.getElementById("btn");
+    let output = document.getElementById("output");
+
+    btn.addEventListener("click", handleClick);
+
+    function handleClick(n1, n2, op) {
+      let num1 = parseInt(num1In.value);
+      let num2 = parseInt(num2In.value);
+      let operator = operatorIn.value;
+      let errorMessageList = formatErrorMessage(errors);
+      let errors = validateInput();
+
+
+
+      function calc() {
+        if (operator == "+") {
+          result = `Rezultāts: ${num1 + num2}`;
+        }
+        if (operator == "-") {
+          result = `Rezultāts: ${num1 - num2}`;
+        }
+        if (operator == "*") {
+          result = `Rezultāts: ${num1 * num2}`;
+        }
+        if (operator == "/") {
+          result = `Rezultāts: ${num1 / num2}`;
+        }
+        return result;
+      }
+    }
+    output.innerHTML = errorMessageList;
+    function formatErrorMessage(errorArray) {
+
+      let errorOutputText = "<ul>";
+      for (let i = 0; i < errors.length; i++) {
+
+        errorOutputText = errorOutputText + "<li>" + errors[i] + "</li>";
+      }
+      errorOutputText = errorOutputText + "</ul>";
+    }
+    function validateInput() {
+      let errors = [
+        "1st num is missing",
+        "2nd num is missing",
+        "what do you want me to do???"
+      ];
+      if (errors.length > 0) {
+        result = formatErrorMessage(errors);
+      }
+      else {
+        result = calc(num1, num2, op);
+      }
+
+    }
+
+  </script>
+</body>
+
+</html>
